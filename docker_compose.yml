@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  conversational_rag_api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app                     # Mount app code
+      - ./vector_store:/app/vector_store  # Mount FAISS or Chroma DB index
+      - ./documents.db:/app/documents.db  # Mount root-level SQLite DB
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - DB_PATH=/app/documents.db         # Correct path inside container
+    restart: unless-stopped
