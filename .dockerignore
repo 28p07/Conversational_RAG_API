@@ -1,2 +1,7 @@
-.pytest_cache
-venv
+.pytest_cache/
+__pycache__/
+venv/
+.env
+tests/
+vector_store/
+documents.db
